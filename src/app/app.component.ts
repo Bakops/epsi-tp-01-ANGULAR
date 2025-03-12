@@ -9,5 +9,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+<<<<<<< HEAD
   title = 'BiblioTech.';
+=======
+  title = 'BiblioTech';
+>>>>>>> 9f2dbfca608bcdcd5a4b475c46d06691c529cf0f
 }

@@ -12,7 +12,11 @@
   display: flex;
   align-items: center;
   gap: 4rem;
+<<<<<<< HEAD
   background-color: #fff;
+=======
+  background-color: #2c3e50;
+>>>>>>> 9f2dbfca608bcdcd5a4b475c46d06691c529cf0f
   color: white;
   padding: 1rem 2rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -36,7 +40,10 @@
 }
 
 .header nav {
+<<<<<<< HEAD
   font-family: "Poppins", sans-serif;
+=======
+>>>>>>> 9f2dbfca608bcdcd5a4b475c46d06691c529cf0f
   margin-top: 0;
 }
 
