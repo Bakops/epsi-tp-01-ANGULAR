@@ -4,7 +4,7 @@
   padding: 2rem;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -71,7 +71,7 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #303f9f;
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button[type="submit"]:active {

@@ -1,16 +1,40 @@
-<h1>Ma bibliothèque</h1>
+<style>
+  .books-header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+  }
+  .books-header button {
+    display: flex;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    align-items: center;
+    padding: 10px 20px;
+    height: 30px;
+    background: linear-gradient(
+      90deg,
+      rgba(252, 33, 13, 1) 0%,
+      rgba(69, 10, 59, 1) 100%
+    );
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+<div class="books-header">
+  <h1>Ma bibliothèque</h1>
 
-
-<button routerLink="/books/add">
-  Ajouter un livre
-</button>
-
+  <button routerLink="/books/add">Ajouter un livre</button>
+</div>
 <div class="books-container">
   <!-- TODO 13 : Les données sont passées à la liste mais pas affichées. Affiche les données -->
   <div *ngIf="data && data.length > 0; else noBooks">
     <div class="book-card" *ngFor="let book of books">
       <div class="book-info">
-        <h2>{{ book.title }}</h2> <!-- TODO 14: Appliquer la directive highlight à ce champ -->
+        <h2>{{ book.title }}</h2>
+        <!-- TODO 14: Appliquer la directive highlight à ce champ -->
         <p>{{ book.author }}</p>
         <p>
           <!-- TODO 15: Afficher la description du livre en utilisant un pour limiter à 20 caractères et ajouter des points de suspension si la description est plus longue.
@@ -19,12 +43,14 @@
         </p>
         <p>Catégorie: {{ book.category }}</p>
         <p>Note: {{ book.rating }}</p>
-        <p>Favori: {{ book.isFavorite ? 'Oui' : 'Non' }}</p>
+        <p>Favori: {{ book.isFavorite ? "Oui" : "Non" }}</p>
       </div>
-      
+
       <div class="book-actions">
-        <button routerLink="/books/{{book.id}}">Détails</button>
-        <button (click)="toggleFavorite(book)">{{ book.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris' }}</button>
+        <button routerLink="/books/{{ book.id }}">Détails</button>
+        <button (click)="toggleFavorite(book)">
+          {{ book.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris" }}
+        </button>
         <button (click)="deleteBook(book.id)">Supprimer</button>
       </div>
     </div>
