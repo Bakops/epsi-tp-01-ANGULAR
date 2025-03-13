@@ -107,3 +107,27 @@ export class HomeComponent {
 </div>
 
 ```
+
+## Problème #3: Structure de page incomplète ✅
+
+**Symptôme**: L'application manque de modularité et de réutilisation de code.
+**Impact**: La maintenance du code est difficile, des composants sont dupliqués.
+**Indice**: Identifiez les éléments communs qui pourraient être extraits en composants réutilisables.
+
+### Solutions
+
+1. Créer les composant `header` et `footer` pour extraire le code de ces deux élément du fichier `app.component.html`
+   commande pour créer les composant: `ng g c header` et `ng g c footer`.
+
+2. intégrer les composant dans le template principale de l'appplication
+
+```
+<app-header></app-header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>
+
+```
