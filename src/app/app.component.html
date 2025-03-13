@@ -4,7 +4,7 @@
        Indice : Il faut utiliser une directive sur le tag <a>
     -->
     <a routerLink="/" routerLinkActive="active">
-      <span>{{ title }}</span>
+      <span>{{ title | textFormat }}</span>
       <!-- TODO 2 : Creer un pipe qui permet de mettre le premier mot en majuscule, le reste en minuscule et de remplacer les underscores par des espaces -->
     </a>
   </h1>
@@ -25,8 +25,16 @@
 <!-- TODO 22 (Bonus point, optionnel): Creer un component pour afficher le header et l'utiliser ici -->
 
 <main class="main-content">
-  <!-- TODO 4: Les pages ne sont pas affichées. Essayer de résoudre le problème -->
   <router-outlet></router-outlet>
+  <h2>Catégories de Livres</h2>
+  <ul class="categories-list">
+    <li
+      *ngFor="let category of categories"
+      [ngClass]="category | textFormat | lowercase"
+    >
+      {{ category | textFormat }}
+    </li>
+  </ul>
 </main>
 
 <footer class="footer">
