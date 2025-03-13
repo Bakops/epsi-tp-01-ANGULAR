@@ -1,4 +1,13 @@
-{{ title }} <!-- TODO 20 : Identifie et corrige l'erreur & affiche le titre en uppercase -->
 <div>
-  <h1>Gérez votre collection de livres en toute simplicité</h1>
+  <main class="main-content">
+    <h2>Catégories de Livres</h2>
+    <ul class="categories-list">
+      <li
+        *ngFor="let category of categories"
+        [ngClass]="category | textFormat | lowercase"
+      >
+        {{ category | textFormat }}
+      </li>
+    </ul>
+  </main>
 </div>

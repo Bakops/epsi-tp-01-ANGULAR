@@ -110,7 +110,7 @@
   margin-top: 5rem;
   padding: 2rem;
   font-family: "Poppins", sans-serif;
-  max-width: 1839px;
+  max-width: 1800px;
   width: 100%;
 }
 
@@ -184,53 +184,4 @@
   padding: 0.5rem;
   background-color: #e0e0e0;
   border-radius: 5px;
-}
-
-/* Styles pour chaque catégorie */
-.science-fiction {
-  background-color: #ff5733; /* Orange */
-}
-
-.fantasy {
-  background-color: #33c1ff; /* Blue */
-}
-
-.thriller {
-  background-color: #ff33a6; /* Pink */
-}
-
-.policier {
-  background-color: #33ff57; /* Green */
-}
-
-.historique {
-  background-color: #ff8c33; /* Light Orange */
-}
-
-.biographie {
-  background-color: #8c33ff; /* Purple */
-}
-
-.autobiographie {
-  background-color: #33ff8c; /* Light Green */
-}
-
-.essai {
-  background-color: #ff3333; /* Red */
-}
-
-.poésie {
-  background-color: #338cff; /* Light Blue */
-}
-
-.théâtre {
-  background-color: #ff33ff; /* Magenta */
-}
-
-.roman {
-  background-color: #33ff33; /* Bright Green */
-}
-
-.nouvelle {
-  background-color: #ffb833; /* Yellow */
 }

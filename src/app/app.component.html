@@ -26,15 +26,6 @@
 
 <main class="main-content">
   <router-outlet></router-outlet>
-  <h2>Catégories de Livres</h2>
-  <ul class="categories-list">
-    <li
-      *ngFor="let category of categories"
-      [ngClass]="category | textFormat | lowercase"
-    >
-      {{ category | textFormat }}
-    </li>
-  </ul>
 </main>
 
 <footer class="footer">

@@ -31,8 +31,68 @@ Remplacer `href` par `routerLink` pour fair eun sorte que les liens fonctionne s
 
 ```
 
-### Problème #2: Besoin de formatage de texte ✅
+## Problème #2: Besoin de formatage de texte ✅
 
 **Symptôme**: Les catégories de livres ne sont pas affichées correctement.
 **Impact**: L'affichage n'est pas esthétique, les underscores sont visibles.
 **Indice**: Vous devez créer un pipe personnalisé pour formater le texte.
+
+### Solutions
+
+1. Créer un pipe qui va permettre le formatage (Première en majuscule et les underscores replacer par des espaces)
+
+```
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'textFormat',
+})
+export class TextFormatPipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return value;
+
+    value = value.replace(/_/g, ' ');
+
+    return value
+      .split(' ')
+      .map((word, index) => {
+        if (index === 0) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        } else {
+          return word.toLowerCase();
+        }
+      })
+      .join(' ');
+  }
+}
+
+```
+
+2. Afficher les différente catégorie
+
+```
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'textFormat',
+})
+export class TextFormatPipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return value;
+
+    value = value.replace(/_/g, ' ');
+
+    return value
+      .split(' ')
+      .map((word, index) => {
+        if (index === 0) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        } else {
+          return word.toLowerCase();
+        }
+      })
+      .join(' ');
+  }
+}
+
+```

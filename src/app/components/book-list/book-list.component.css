@@ -1,0 +1,23 @@
+.books-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+.books-header button {
+  display: flex;
+  font-family: Poppins, sans-serif;
+  font-size: 15px;
+  align-items: center;
+  padding: 10px 20px;
+  height: 30px;
+  background: linear-gradient(
+    90deg,
+    rgba(252, 33, 13, 1) 0%,
+    rgba(69, 10, 59, 1) 100%
+  );
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
