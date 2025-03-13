@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { TextFormatPipe } from './pipe/text-format.pipe';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet, TextFormatPipe, CommonModule],
+  imports: [RouterOutlet, CommonModule, HeaderComponent, FooterComponent],
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'biblioTech.';
   categories = [
     'Science-Fiction',
     'Fantasy',

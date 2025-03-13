@@ -71,28 +71,39 @@ export class TextFormatPipe implements PipeTransform {
 2. Afficher les différente catégorie
 
 ```
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'textFormat',
-})
-export class TextFormatPipe implements PipeTransform {
-  transform(value: string): string {
-    if (!value) return value;
-
-    value = value.replace(/_/g, ' ');
-
-    return value
-      .split(' ')
-      .map((word, index) => {
-        if (index === 0) {
-          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-        } else {
-          return word.toLowerCase();
-        }
-      })
-      .join(' ');
-  }
+export class HomeComponent {
+  title = 'Bienvenue sur BiblioTech';
+  categories = [
+    'Science-Fiction',
+    'Fantasy',
+    'Thriller',
+    'Policier',
+    'Historique',
+    'Biographie',
+    'Autobiographie',
+    'Essai',
+    'Poésie',
+    'Théâtre',
+    'Roman',
+    'Nouvelle',
+  ];
 }
+
+```
+
+```
+<div>
+  <main class="main-content">
+    <h1>Catégories de Livres</h1>
+    <ul class="categories-list">
+      <li
+        *ngFor="let category of categories"
+        [ngClass]="category | textFormat | lowercase"
+      >
+        {{ category | textFormat }}
+      </li>
+    </ul>
+  </main>
+</div>
 
 ```
