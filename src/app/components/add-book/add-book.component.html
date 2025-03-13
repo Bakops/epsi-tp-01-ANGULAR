@@ -1,18 +1,31 @@
 <div class="form-container">
   <h1>Ajouter un livre</h1>
   <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="title" placeholder="Titre du livre" />
-    <input type="text" formControlName="author" placeholder="Nom de l'auteur" />
-    <input
-      type="text"
-      formControlName="description"
-      placeholder="Description du livre"
-    />
-    <input
-      type="text"
-      formControlName="category"
-      placeholder="Catégorie du livre"
-    />
-    <button type="submit">Ajouter le livre</button>
+    <div class="input_formulaire">
+      <mat-form-field appearance="fill">
+        <mat-label>Titre du livre</mat-label>
+        <input matInput type="text" formControlName="title" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nom de l'auteur</mat-label>
+        <input matInput type="text" formControlName="author" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description du livre</mat-label>
+        <input matInput type="text" formControlName="description" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Catégorie</mat-label>
+        <mat-select formControlName="category" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category | textFormat }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">
+      Ajouter le livre
+    </button>
   </form>
 </div>

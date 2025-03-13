@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TextFormatPipe } from '../../pipe/text-format.pipe';
+import { TextFormatPipe } from '../../../pipe/text-format.pipe';
 
 @Component({
   selector: 'app-header',

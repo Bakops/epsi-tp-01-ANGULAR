@@ -1,28 +1,61 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
+import { TextFormatPipe } from '../../pipe/text-format.pipe';
 import { BookService } from '../../services/book.service';
-
 @Component({
   selector: 'app-add-book',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TextFormatPipe,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+  ],
   templateUrl: 'add-book.component.html',
   styleUrls: ['add-book.component.css'],
 })
-export class AddBookComponent implements OnInit {
-  bookForm!: FormGroup;
+export class AddBookComponent {
+  @Output() bookAdded = new EventEmitter<any>();
+
+  bookForm: FormGroup;
+  categories = [
+    'Science-Fiction',
+    'Fantasy',
+    'Thriller',
+    'Policier',
+    'Historique',
+    'Biographie',
+    'Autobiographie',
+    'Essai',
+    'Poésie',
+    'Théâtre',
+    'Roman',
+    'Nouvelle',
+  ];
 
   constructor(
     private fb: FormBuilder,
     private bookService: BookService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    // TODO 6 : Créer un formulaire avec les champs suivants : title, author, description, category
-    // TODO 7 : Ajouter les validations nécessaires
+  ) {
+    this.bookForm = this.fb.group({
+      title: ['', Validators.required],
+      author: ['', Validators.required],
+      description: ['', Validators.required],
+      category: [[], Validators.required],
+    });
   }
 
   onSubmit(): void {
@@ -35,6 +68,8 @@ export class AddBookComponent implements OnInit {
           console.error("Erreur lors de l'ajout du livre", err);
         },
       });
+      this.bookAdded.emit(this.bookForm.value);
+      this.bookForm.reset();
     }
   }
 }
