@@ -5,7 +5,7 @@
 </div>
 <div class="books-container">
   <!-- TODO 13 : Les données sont passées à la liste mais pas affichées. Affiche les données -->
-  <div *ngIf="data && data.length > 0; else noBooks">
+  <div *ngIf="books && books.length > 0; else noBooks">
     <div class="book-card" *ngFor="let book of books">
       <div class="book-info">
         <h2>{{ book.title }}</h2>

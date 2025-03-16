@@ -27,4 +27,28 @@ export class AppComponent {
     'Roman',
     'Nouvelle',
   ];
+
+  books = [
+    {
+      title: 'Dune',
+      author: 'Frank Herbert',
+      description: '...',
+      category: ['Science-Fiction'],
+    },
+    {
+      title: 'Le Seigneur des Anneaux',
+      author: 'J.R.R. Tolkien',
+      description: '...',
+      category: ['Fantasy'],
+    },
+    // Ajoutez d'autres livres ici
+  ];
+
+  getBooksByCategory(category: string) {
+    return this.books.filter((book) => book.category.includes(category));
+  }
+
+  addBook(book: any) {
+    this.books.push(book);
+  }
 }

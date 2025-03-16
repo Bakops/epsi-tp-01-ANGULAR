@@ -21,3 +21,8 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.book-card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}

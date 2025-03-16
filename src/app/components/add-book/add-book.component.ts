@@ -6,12 +6,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import { Router } from '@angular/router';
 import { TextFormatPipe } from '../../pipe/text-format.pipe';
 import { BookService } from '../../services/book.service';
+
 @Component({
   selector: 'app-add-book',
   standalone: true,
@@ -22,6 +25,8 @@ import { BookService } from '../../services/book.service';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatCheckboxModule,
+    MatSliderModule,
   ],
   templateUrl: 'add-book.component.html',
   styleUrls: ['add-book.component.css'],
@@ -55,6 +60,8 @@ export class AddBookComponent {
       author: ['', Validators.required],
       description: ['', Validators.required],
       category: [[], Validators.required],
+      isFavorite: [false],
+      rating: [0],
     });
   }
 
@@ -62,14 +69,14 @@ export class AddBookComponent {
     if (this.bookForm.valid) {
       this.bookService.addBook(this.bookForm.value).subscribe({
         next: () => {
+          this.bookAdded.emit(this.bookForm.value);
+          this.bookForm.reset();
           this.router.navigate(['/books']);
         },
         error: (err: any) => {
           console.error("Erreur lors de l'ajout du livre", err);
         },
       });
-      this.bookAdded.emit(this.bookForm.value);
-      this.bookForm.reset();
     }
   }
 }
