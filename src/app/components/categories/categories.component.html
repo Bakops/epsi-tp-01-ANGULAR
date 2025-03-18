@@ -1,0 +1,18 @@
+<div>
+  <main class="main-content">
+    <h1>Catégories de Livres</h1>
+    <ul class="categories-list">
+      <li
+        *ngFor="let category of categories"
+        [ngClass]="category | textFormat | lowercase"
+      >
+        <h3>{{ category | textFormat }}</h3>
+        <ul class="books-list">
+          <li *ngFor="let book of getBooksByCategory(category)">
+            {{ book.title }} - {{ book.author }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </main>
+</div>

@@ -10,23 +10,39 @@
       <div class="book-info">
         <h2>{{ book.title }}</h2>
         <!-- TODO 14: Appliquer la directive highlight à ce champ -->
-        <p>{{ book.author }}</p>
+        <p>
+          <strong><i>Auteur:</i></strong> {{ book.author }}
+        </p>
         <p>
           <!-- TODO 15: Afficher la description du livre en utilisant un pour limiter à 20 caractères et ajouter des points de suspension si la description est plus longue.
            Il faut utiliser un pipe existant ou en créer un nouveau pipe. Libre choix -->
+          <strong><i>Description:</i></strong>
           {{ book.description }}
         </p>
-        <p>Catégorie: {{ book.category }}</p>
-        <p>Note: {{ book.rating }}</p>
-        <p>Favori: {{ book.isFavorite ? "Oui" : "Non" }}</p>
+        <p>
+          <strong><i>Catégorie:</i></strong> {{ book.category }}
+        </p>
+        <p>
+          <strong><i>Note:</i></strong> {{ book.rating }}/5
+        </p>
+        <p>
+          <strong><i>Favori:</i></strong> {{ book.isFavorite ? "Oui" : "Non" }}
+        </p>
       </div>
 
       <div class="book-actions">
-        <button routerLink="/books/{{ book.id }}">Détails</button>
-        <button (click)="toggleFavorite(book)">
+        <button routerLink="/books/{{ book.id }}" class="details-button">
+          Détails
+        </button>
+        <button (click)="toggleFavorite(book)" class="favorite-button">
+          <mat-icon>{{
+            book.isFavorite ? "favorite" : "favorite_border"
+          }}</mat-icon>
           {{ book.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris" }}
         </button>
-        <button (click)="deleteBook(book.id)">Supprimer</button>
+        <button (click)="deleteBook(book.id)" class="delete-button">
+          Supprimer
+        </button>
       </div>
     </div>
   </div>

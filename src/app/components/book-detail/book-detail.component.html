@@ -2,12 +2,13 @@
   <div class="book-card">
     <!-- TODO 9: Dans la console on voit cette erreur : main.ts:5 ERROR TypeError: Cannot read properties of undefined (reading 'title')
      En realité on affiche le titre du livre avant qu'il ne soit défini. Fix le bug -->
-    <h1 class="book-title">{{ book.title }}</h1> <!-- TODO 10: Appliquer la directive highlight à ce champ -->
-    
+    <h1 class="book-title">{{ book.title }}</h1>
+    <!-- TODO 10: Appliquer la directive highlight à ce champ -->
+
     <div class="book-info">
       <p class="author">{{ book.author }}</p>
       <p class="description">{{ book.description }}</p>
-      
+
       <div class="info-grid">
         <div class="info-item">
           <strong>Catégorie</strong>
@@ -19,22 +20,16 @@
         </div>
         <div class="info-item">
           <strong>Statut</strong>
-          {{ book.isFavorite ? 'Dans les favoris' : 'Non favoris' }}
+          {{ book.isFavorite ? "Dans les favoris" : "Non favoris" }}
         </div>
       </div>
     </div>
 
     <div class="button-container">
       <!-- TODO 12: Le bouton ne fonctionne pas -->
-      <button class="back-button" (click)="goBack()">
+      <button class="back-button" routerLink="/books">
         <i class="fas fa-arrow-left"></i> Retour
       </button>
     </div>
   </div>
 </div>
-    
-
-          
-        
-      
-    

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 import { HomeComponent } from './components/home/home.component';
 
 // TODO 5 : Créer une route pour la page détail d'un livre
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'books/add', component: AddBookComponent },
   { path: 'books/:id', component: BookDetailComponent },
   { path: 'books/list', component: BookListComponent },
+  { path: 'categories', component: CategoriesComponent },
   { path: '**', redirectTo: '' },
 ];
 

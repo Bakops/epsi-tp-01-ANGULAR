@@ -1,18 +1,14 @@
-<div>
-  <main class="main-content">
-    <h1>Catégories de Livres</h1>
-    <ul class="categories-list">
-      <li
-        *ngFor="let category of categories"
-        [ngClass]="category | textFormat | lowercase"
-      >
-        <h3>{{ category | textFormat }}</h3>
-        <ul class="books-list">
-          <li *ngFor="let book of getBooksByCategory(category)">
-            {{ book.title }} - {{ book.author }}
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </main>
+<div class="hero-header">
+  <h1>
+    Bibliotech : Votre Portail Vers un Monde<br />
+    de Lecture Illimité
+  </h1>
+  <p>
+    Découvrez Bibliotech, votre bibliothèque en ligne où chaque livre est une
+    nouvelle aventure. Accédez instantanément à des milliers d'ouvrages,<br />
+    où que vous soyez. Que vous aimiez les romans captivants ou les guides
+    pratiques, Bibliotech vous offre<br />
+    un univers de lecture infini. Rejoignez-nous et laissez-vous inspirer !
+  </p>
+  <button><a routerLink="/books">Ajouter un livre</a></button>
 </div>

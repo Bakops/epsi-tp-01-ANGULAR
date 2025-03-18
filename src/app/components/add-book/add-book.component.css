@@ -1,9 +1,23 @@
-button[type="submit"] {
+.form-container h1 {
+  margin-bottom: 2rem;
+}
+
+.input_formulaire {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+}
+
+.mat-mdc-form-field {
+  width: 25rem;
+}
+
+form button {
   display: flex;
   font-family: Poppins, sans-serif;
   font-size: 15px;
   align-items: center;
-  padding: 10px 20px;
+  padding: 20px 20px;
   height: 30px;
   background: linear-gradient(
     90deg,
@@ -14,36 +28,4 @@ button[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-input {
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
-}
-input:focus {
-  outline: none;
-  border: 1px;
-  border-color: rgb(189, 16, 0);
-  box-shadow: 0 0 0 3px rgba(189, 16, 0, 0.322);
-}
-
-input::placeholder {
-  font-family: Poppins, sans-serif;
-  color: #9e9e9e;
-}
-
-.form-container mat-form-field {
-  width: 25rem;
-}
-
-.input_formulaire {
-  display: flex;
-  align-items: center;
-  gap: 80px;
 }

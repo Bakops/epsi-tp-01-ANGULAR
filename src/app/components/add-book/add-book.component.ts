@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TextFormatPipe } from '../../pipe/text-format.pipe';
 import { BookService } from '../../services/book.service';
@@ -52,8 +53,9 @@ export class AddBookComponent {
 
   constructor(
     private fb: FormBuilder,
-    private bookService: BookService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private bookService: BookService
   ) {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
@@ -70,7 +72,9 @@ export class AddBookComponent {
       this.bookService.addBook(this.bookForm.value).subscribe({
         next: () => {
           this.bookAdded.emit(this.bookForm.value);
-          this.bookForm.reset();
+          this.snackBar.open('Livre ajouté avec succées ! ✅', 'Fermer', {
+            duration: 3000,
+          });
           this.router.navigate(['/books']);
         },
         error: (err: any) => {
