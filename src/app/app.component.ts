@@ -13,20 +13,6 @@ import { HeaderComponent } from './components/layout/header/header.component';
 })
 export class AppComponent {
   title = 'biblioTech.';
-  categories = [
-    'Science-Fiction',
-    'Fantasy',
-    'Thriller',
-    'Policier',
-    'Historique',
-    'Biographie',
-    'Autobiographie',
-    'Essai',
-    'Poésie',
-    'Théâtre',
-    'Roman',
-    'Nouvelle',
-  ];
 
   books = [
     {

@@ -20,7 +20,7 @@
           {{ book.description }}
         </p>
         <p>
-          <strong><i>Catégorie:</i></strong> {{ book.category }}
+          <strong><i>Catégorie:</i></strong> {{ book.category | textFormat }}
         </p>
         <p>
           <strong><i>Note:</i></strong> {{ book.rating }}/5

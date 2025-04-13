@@ -5,11 +5,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { Book } from '../../models/book.model';
+import { TextFormatPipe } from '../../pipe/text-format.pipe';
 import { BookService } from '../../services/book.service';
+
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    MatIconModule,
+    TextFormatPipe,
+  ],
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css'],
 })

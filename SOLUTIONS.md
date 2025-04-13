@@ -131,3 +131,139 @@ export class HomeComponent {
 <app-footer></app-footer>
 
 ```
+
+### Problème #4: Pages non affichées ✅
+
+**Symptôme**: Certaines pages ne s'affichent pas correctement.
+**Impact**: Les utilisateurs ne peuvent pas accéder à certaines fonctionnalités.
+**Indice**: Vérifiez la configuration des routes et la structure des composants.
+
+### Solutions
+
+1. Modifié le fichier `app.routes.ts` pour ajouter et vérifier les routes des diéfférente fonctionnalités de l'application.
+
+```
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'books', component: BookListComponent },
+  { path: 'books/add', component: AddBookComponent },
+  { path: 'books/:id', component: BookDetailComponent },
+  { path: 'books/list', component: BookListComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: '**', redirectTo: '' },
+];
+
+```
+
+2. Ajouter les routes dns mon `header.componenets.html`.
+
+```
+<nav>
+    <ul>
+      <li>
+        <a routerLink="/" routerLinkActive="active">Accueil</a>
+      </li>
+      <li>
+        <a routerLink="/books/list" routerLinkActive="active">Bibliothèque</a>
+      </li>
+      <li>
+        <a routerLink="/categories" routerLinkActive="active">Categories</a>
+      </li>
+      <li>
+        <a routerLink="/books/add" routerLinkActive="active"
+          >Ajouter un livre</a
+        >
+      </li>
+    </ul>
+  </nav>
+```
+
+### Problème #5: Route manquante ✅
+
+**Symptôme**: La page de détail d'un livre n'est pas accessible.
+**Impact**: Les utilisateurs ne peuvent pas voir les détails d'un livre.
+**Indice**: Vous devez créer une route dans le fichier de configuration des routes.
+
+### Solutions
+
+1. Créer une routes pour le détails de chaque livre.
+
+```
+{ path: 'books/:id', component: BookDetailComponent },
+
+```
+
+2. intégrer la routes sur un boutons détail de chaque livre dans le composant `book-list.component.html`.
+
+```
+<button routerLink="/books/{{ book.id }}" class="details-button">
+          Détails
+</button>
+
+```
+
+### Problème #6: Formulaire incomplet
+
+**Symptôme**: Le formulaire d'ajout de livre n'est pas implémenté.
+**Impact**: Les utilisateurs ne peuvent pas ajouter de nouveaux livres.
+**Indice**: Vous devez créer un formulaire avec les champs nécessaires.
+
+### Solutions
+
+1. Créer un composant pour le formulaire d'ajout de livre (En utilsiant Angular Material).
+
+```
+<div class="form-container">
+  <h1>Ajouter un livre</h1>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div class="input_formulaire">
+      <mat-form-field appearance="fill">
+        <mat-label>Titre du livre</mat-label>
+        <input matInput type="text" formControlName="title" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nom de l'auteur</mat-label>
+        <input matInput type="text" formControlName="author" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description du livre</mat-label>
+        <input matInput type="text" formControlName="description" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Catégorie</mat-label>
+        <mat-select formControlName="category" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category | textFormat }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">
+      Ajouter le livre
+    </button>
+  </form>
+</div>
+
+```
+
+2. Créer un service pour gérer l'ajout de livre.
+
+```
+addBook(book: Partial<Book>): Observable<Book> {
+  const newBook: Book = {
+    id: (BOOKS.length + 1).toString(),
+    title: book.title || '',
+    author: book.author || '',
+    description: book.description || '',
+    category: book.category || '',
+    rating: 0,
+    isFavorite: false
+  };
+
+  BOOKS.push(newBook);
+
+  return of(newBook).pipe(delay(300));
+}
+
+```

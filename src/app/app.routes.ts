@@ -6,7 +6,6 @@ import { BookListComponent } from './components/book-list/book-list.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { HomeComponent } from './components/home/home.component';
 
-// TODO 5 : Créer une route pour la page détail d'un livre
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'books', component: BookListComponent },

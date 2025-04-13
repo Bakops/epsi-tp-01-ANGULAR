@@ -25,6 +25,11 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.books-header button:hover {
+  transform: translateY(-2px);
 }
 
 .add-book-button {
