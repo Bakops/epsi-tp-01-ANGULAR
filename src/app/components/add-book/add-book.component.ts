@@ -34,7 +34,6 @@ import { BookService } from '../../services/book.service';
 })
 export class AddBookComponent {
   @Output() bookAdded = new EventEmitter<any>();
-
   bookForm: FormGroup;
   categories = [
     'Science-Fiction',
@@ -72,7 +71,7 @@ export class AddBookComponent {
       this.bookService.addBook(this.bookForm.value).subscribe({
         next: () => {
           this.bookAdded.emit(this.bookForm.value);
-          this.snackBar.open('Livre ajouté avec succées ! ✅', 'Fermer', {
+          this.snackBar.open('Livre ajouté avec succès ! ✅', 'Fermer', {
             duration: 3000,
           });
           this.router.navigate(['/books']);

@@ -15,9 +15,12 @@ body {
 .main-content {
   flex: 1;
   margin-top: 5rem;
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   font-family: "Poppins", sans-serif;
-  max-width: 1665px;
+  max-width: 1832px;
   width: 100%;
 }
 

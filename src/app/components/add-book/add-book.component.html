@@ -5,15 +5,42 @@
       <mat-form-field appearance="fill">
         <mat-label>Titre du livre</mat-label>
         <input matInput type="text" formControlName="title" />
+        <mat-error
+          *ngIf="
+            bookForm.get('title')?.hasError('required') &&
+            bookForm.get('title')?.touched
+          "
+        >
+          Le titre est requis.
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label>Nom de l'auteur</mat-label>
         <input matInput type="text" formControlName="author" />
+        <mat-error
+          *ngIf="
+            bookForm.get('author')?.hasError('required') &&
+            bookForm.get('author')?.touched
+          "
+        >
+          Le nom de l'auteur est requis.
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label>Description du livre</mat-label>
         <input matInput type="text" formControlName="description" />
+        <mat-error
+          *ngIf="
+            bookForm.get('description')?.hasError('required') &&
+            bookForm.get('description')?.touched
+          "
+        >
+          La description est requise.
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label>Catégorie</mat-label>
         <mat-select formControlName="category" multiple>
@@ -21,6 +48,14 @@
             {{ category | textFormat }}
           </mat-option>
         </mat-select>
+        <mat-error
+          *ngIf="
+            bookForm.get('category')?.hasError('required') &&
+            bookForm.get('category')?.touched
+          "
+        >
+          Au moins une catégorie doit être sélectionnée.
+        </mat-error>
       </mat-form-field>
     </div>
 

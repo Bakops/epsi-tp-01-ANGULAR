@@ -202,7 +202,7 @@ export const routes: Routes = [
 
 ```
 
-### Problème #6: Formulaire incomplet
+### Problème #6: Formulaire incomplet ✅
 
 **Symptôme**: Le formulaire d'ajout de livre n'est pas implémenté.
 **Impact**: Les utilisateurs ne peuvent pas ajouter de nouveaux livres.
@@ -267,3 +267,219 @@ addBook(book: Partial<Book>): Observable<Book> {
 }
 
 ```
+
+### Problème #7: Validations manquantes ✅
+
+**Symptôme**: Le formulaire accepte des données invalides.
+**Impact**: Des données incomplètes ou incorrectes peuvent être soumises.
+**Indice**: Ajoutez des validations aux champs du formulaire.
+
+### Solutions
+
+1. Ajouter des validateurs intégrés d'Angular pour s'assurer que les champs sont remplis et valides. ( Utiliser `Validators.required` pour les champ obligatoire et `Validators.minLength` pour le titre et l'auteur)
+
+```
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private bookService: BookService
+  ) {
+    this.bookForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      author: ['', Validators.required],
+      description: ['', Validators.required],
+      category: [[], Validators.required],
+    });
+  }
+
+```
+
+2. Mettre à Jour la template pour afficher les erreurs de validation.
+
+```
+<div class="form-container">
+  <h1>Ajouter un livre</h1>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div class="input_formulaire">
+      <mat-form-field appearance="fill">
+        <mat-label>Titre du livre</mat-label>
+        <input matInput type="text" formControlName="title" />
+        <mat-error
+          *ngIf="
+            bookForm.get('title')?.hasError('required') &&
+            bookForm.get('title')?.touched
+          "
+        >
+          Le titre est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nom de l'auteur</mat-label>
+        <input matInput type="text" formControlName="author" />
+        <mat-error
+          *ngIf="
+            bookForm.get('author')?.hasError('required') &&
+            bookForm.get('author')?.touched
+          "
+        >
+          Le nom de l'auteur est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description du livre</mat-label>
+        <input matInput type="text" formControlName="description" />
+        <mat-error
+          *ngIf="
+            bookForm.get('description')?.hasError('required') &&
+            bookForm.get('description')?.touched
+          "
+        >
+          La description est requise.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Catégorie</mat-label>
+        <mat-select formControlName="category" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category | textFormat }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            bookForm.get('category')?.hasError('required') &&
+            bookForm.get('category')?.touched
+          "
+        >
+          Au moins une catégorie doit être sélectionnée.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">
+      Ajouter le livre
+    </button>
+  </form>
+</div>
+
+```
+
+### Problème #8: Navigation manquante ✅
+
+**Symptôme**: Impossible de revenir à la page précédente depuis certaines vues.
+**Impact**: L'utilisateur se retrouve bloqué dans certaines pages.
+**Indice**: Ajoutez un bouton de retour et implémentez la navigation.
+
+### Solutions
+
+1. Réutliser le router link pour revenir à la page précédente.
+
+```
+ <button class="back-button" routerLink="/books">
+        <i class="fas fa-arrow-left"></i> Retour
+      </button>
+```
+
+### Problème #9: Erreur dans la console ✅
+
+**Symptôme**: Erreur "Cannot read properties of undefined" dans la console.
+**Impact**: L'application peut planter lorsque les données ne sont pas chargées.
+**Indice**: Gérez correctement les données asynchrones avant d'y accéder.
+
+### Solutions
+
+1. Créer une méthode pour gérer les données asynchrones avant d'y accéder.
+
+```
+ async loadBooks() {
+    try {
+      const data = await this.bookService.getBooks().toPromise();
+      if (data) {
+        this.books = data;
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement des livres', error);
+    }
+  }
+```
+
+2. Utiliser ngIf pour gérer les données asynchrones dans le template.
+
+```
+<div *ngIf="books && books.length > 0; else noBooks">
+
+```
+
+### Problème #10: Directive non appliquée ✅
+
+**Symptôme**: Certains éléments ne sont pas mis en évidence comme prévu.
+**Impact**: L'expérience utilisateur est dégradée, manque d'indications visuelles.
+**Indice**: Appliquez la directive highlight aux éléments appropriés.
+
+### Solutions
+
+1. Définir une directive `highlight` pour mettre en évidence les éléments.
+
+```
+ import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[appHighlight]',
+})
+export class HighlightDirective implements OnInit {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  ngOnInit() {
+    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', 'yellow');
+  }
+}
+
+```
+
+2. Déclarer la directive dans le module.
+
+```
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router, RouterModule } from '@angular/router';
+import { HighlightDirective } from '../../directives/highlight.directive';
+import { Book } from '../../models/book.model';
+import { TextFormatPipe } from '../../pipe/text-format.pipe';
+import { BookService } from '../../services/book.service';
+@Component({
+  selector: 'app-book-list',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    MatIconModule,
+    TextFormatPipe,
+    HighlightDirective,
+  ],
+  templateUrl: './book-list.component.html',
+  styleUrls: ['./book-list.component.css'],
+})
+
+```
+
+3. Appliquer la directive dans le template.
+
+```
+<h2 appHighlight>{{ book.title }}</h2>
+
+```
+
+### Problème #11: Bouton non fonctionnel
+
+**Symptôme**: Certains boutons ne réagissent pas aux clics.
+**Impact**: Les actions ne peuvent pas être effectuées.
+**Indice**: Vérifiez les gestionnaires d'événements associés aux boutons.

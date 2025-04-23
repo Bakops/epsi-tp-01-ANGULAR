@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
+import { HighlightDirective } from '../../directives/highlight.directive';
 import { Book } from '../../models/book.model';
 import { TextFormatPipe } from '../../pipe/text-format.pipe';
 import { BookService } from '../../services/book.service';
-
 @Component({
   selector: 'app-book-list',
   standalone: true,
@@ -17,6 +17,7 @@ import { BookService } from '../../services/book.service';
     FormsModule,
     MatIconModule,
     TextFormatPipe,
+    HighlightDirective,
   ],
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css'],
