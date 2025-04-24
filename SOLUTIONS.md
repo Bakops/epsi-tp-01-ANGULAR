@@ -566,7 +566,7 @@ deleteBook(id: string): void {
       </div>
 ```
 
-### Problème #13: Descriptions trop longues
+### Problème #13: Descriptions trop longues ✅
 
 **Symptôme**: Les descriptions des livres prennent trop de place.
 **Impact**: L'interface utilisateur est encombrée et moins lisible.
@@ -643,4 +643,85 @@ import { BookService } from '../../services/book.service';
       {{ book.description | limitext : 20 }}
     </p>
 
+```
+
+### Problème #14: Retour utilisateur manquant ✅
+
+**Symptôme**: Aucune confirmation n'est affichée après certaines actions.
+**Impact**: L'utilisateur ne sait pas si son action a réussi ou échoué.
+**Indice**: Ajoutez des alertes ou notifications pour informer l'utilisateur.
+
+### Solutions `add-book`
+
+1. Importer l'éléement snack-bar de Angular material dans dasn le module et creer une méthode pour afficher une notification lors de la création d'un nouveaux livre.
+
+```
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+onSubmit(): void {
+    if (this.bookForm.valid) {
+      this.bookService.addBook(this.bookForm.value).subscribe({
+        next: () => {
+          this.bookAdded.emit(this.bookForm.value);
+          this.snackBar.open('Livre ajouté avec succès ! ✅', 'Fermer', {
+            duration: 3000,
+          });
+          this.router.navigate(['/books']);
+        },
+        error: (err: any) => {
+          console.error("Erreur lors de l'ajout du livre", err);
+        },
+      });
+    }
+  }
+
+```
+
+2. Lier cette méthode à l'événement ngSubmit du formulaire pour afficher une notification lors de la création d'un nouveaux livre.
+
+```
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+```
+
+### Solutions `add-book`
+
+```
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+toggleFavorite(book: Book): void {
+    this.bookService.toggleFavorite(book.id).subscribe({
+      next: (updatedBook: Book) => {
+      },
+      error: (err: any) => {
+        console.error('Erreur lors de la modification du favori:', err);
+      },
+    });
+  }
+
+  deleteBook(id: string): void {
+    this.bookService.deleteBook(id).subscribe({
+      next: () => {
+        console.log('Livre supprimé:', id);
+        this.snackBar.open('Livre supprimé avec succées ! ✅', 'Fermer', {
+          duration: 3000,
+        });
+      },
+      error: (err: any) => {
+        console.error('Erreur lors de la suppression du livre:', err);
+      },
+    });
+  }
+
+```
+
+```
+<button (click)="toggleFavorite(book)" class="favorite-button">
+          <mat-icon>{{
+            book.isFavorite ? "favorite" : "favorite_border"
+          }}</mat-icon>
+          {{ book.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris" }}
+        </button>
+        <button (click)="deleteBook(book.id)" class="delete-button">
+          Supprimer
+        </button>
 ```
