@@ -725,3 +725,37 @@ toggleFavorite(book: Book): void {
           Supprimer
         </button>
 ```
+
+### Problème #16: Directive incomplète ✅
+
+**Symptôme**: La directive highlight ne fonctionne pas comme prévu.
+**Impact**: Certains éléments ne sont pas mis en évidence correctement.
+**Indice**: Modifiez la directive pour qu'elle affecte à la fois la couleur de fond et le poids du texte.
+
+### Solutions
+
+1. Modifier la directive `highlight` pour qu'elle affecte à la fois la couleur de fond et le poids du texte.
+
+```
+import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[appHighlight]',
+})
+export class HighlightDirective implements OnInit {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  ngOnInit() {
+    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', 'yellow');
+    this.renderer.setStyle(this.el.nativeElement, 'color', 'black');
+    this.renderer.setStyle(this.el.nativeElement, 'fontWeight', 'bold');
+  }
+}
+
+```
+
+2. Appliquer la directive dans le template.
+
+```
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+```
