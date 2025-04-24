@@ -683,7 +683,7 @@ onSubmit(): void {
 <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
 ```
 
-### Solutions `add-book`
+### Solutions `book-list`
 
 ```
 import { MatSnackBar } from '@angular/material/snack-bar';
