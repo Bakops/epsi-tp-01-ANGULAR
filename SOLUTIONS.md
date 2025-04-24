@@ -478,8 +478,90 @@ import { BookService } from '../../services/book.service';
 
 ```
 
-### Problème #11: Bouton non fonctionnel
+### Problème #11: Bouton non fonctionnel ✅
 
 **Symptôme**: Certains boutons ne réagissent pas aux clics.
 **Impact**: Les actions ne peuvent pas être effectuées.
 **Indice**: Vérifiez les gestionnaires d'événements associés aux boutons.
+
+### Solutions
+
+1. Créer des évènement lié au méthodes du composant ex: bouton au clics
+
+```
+deleteBook(id: string): void {
+    this.bookService.deleteBook(id).subscribe(() => {
+      this.loadBooks(); // Recharger la liste après suppression
+    });
+  }
+
+```
+
+2. Déclarer la directive dans le module.
+
+```
+<button (click)="deleteBook()">Supprimer</button>
+
+```
+
+### Problème #12: Données non affichées ✅
+
+**Symptôme**: Les données sont chargées mais n'apparaissent pas dans l'interface.
+**Impact**: L'utilisateur ne voit pas les informations importantes.
+**Indice**: Vérifiez comment les données sont passées et affichées dans les templates.
+
+### Solutions
+
+1. Vérifier si les données sont bien chargées dans le composant.
+
+```
+  ngOnInit(): void {
+    this.loadBooks();
+  }
+
+  loadBooks(): void {
+    this.loading = true;
+    this.bookService.getBooks().subscribe({
+      next: (data) => {
+        this.books = data;
+        this.loading = false;
+        console.log('Données chargées:', this.books); // Pour le débogage
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des livres:', err);
+        this.error = true;
+        this.loading = false;
+      }
+    });
+  }
+
+```
+
+2. Bien afficher les données dans le template.
+
+```
+<div *ngIf="books && books.length > 0; else noBooks">
+    <div class="book-card" *ngFor="let book of books">
+      <div class="book-info">
+        <h2 appHighlight>{{ book.title }}</h2>
+        <!-- TODO 14: Appliquer la directive highlight à ce champ -->
+        <p>
+          <strong><i>Auteur:</i></strong> {{ book.author }}
+        </p>
+        <p>
+          <!-- TODO 15: Afficher la description du livre en utilisant un pour limiter à 20 caractères et ajouter des points de suspension si la description est plus longue.
+           Il faut utiliser un pipe existant ou en créer un nouveau pipe. Libre choix -->
+          <strong><i>Description:</i></strong>
+          {{ book.description }}
+        </p>
+        <p>
+          <strong><i>Catégorie:</i></strong> {{ book.category | textFormat }}
+        </p>
+        <p>
+          <strong><i>Note:</i></strong> {{ book.rating }}/5
+        </p>
+        <p>
+          <strong><i>Favori:</i></strong> {{ book.isFavorite ? "Oui" : "Non" }}
+        </p>
+      </div>
+```
