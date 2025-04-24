@@ -565,3 +565,82 @@ deleteBook(id: string): void {
         </p>
       </div>
 ```
+
+### Problème #13: Descriptions trop longues
+
+**Symptôme**: Les descriptions des livres prennent trop de place.
+**Impact**: L'interface utilisateur est encombrée et moins lisible.
+**Indice**: Utilisez ou créez un pipe pour limiter la longueur du texte affiché.
+
+### Solutions
+
+1. Créer un pipe pour tronquer la description `Limitext`.
+
+```
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'limitext',
+})
+export class LimitextPipe implements PipeTransform {
+  transform(
+    value: string,
+    limit: number = 100,
+    completeWords: boolean = false,
+    ellipsis: string = '...'
+  ): string {
+    if (!value) return '';
+
+    if (value.length <= limit) {
+      return value;
+    }
+
+    if (completeWords) {
+      limit = value.substring(0, limit).lastIndexOf(' ');
+    }
+
+    return value.substring(0, limit) + ellipsis;
+  }
+}
+
+```
+
+2. Déclarer le pipe `Limitext` dans le module.
+
+```
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router, RouterModule } from '@angular/router';
+import { HighlightDirective } from '../../directives/highlight.directive';
+import { Book } from '../../models/book.model';
+import { LimitextPipe } from '../../pipe/limitext.pipe';
+import { TextFormatPipe } from '../../pipe/text-format.pipe';
+import { BookService } from '../../services/book.service';
+
+@Component
+  selector: 'app-book-list',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    MatIconModule,
+    TextFormatPipe,
+    HighlightDirective,
+    LimitextPipe,
+  ],
+
+```
+
+3. Intégrer le pipe dans le composant.
+
+```
+    <p>
+      <strong><i>Description:</i></strong>
+      {{ book.description | limitext : 20 }}
+    </p>
+
+```

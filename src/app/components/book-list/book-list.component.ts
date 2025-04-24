@@ -6,8 +6,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { Book } from '../../models/book.model';
+import { LimitextPipe } from '../../pipe/limitext.pipe';
 import { TextFormatPipe } from '../../pipe/text-format.pipe';
 import { BookService } from '../../services/book.service';
+
 @Component({
   selector: 'app-book-list',
   standalone: true,
@@ -18,6 +20,7 @@ import { BookService } from '../../services/book.service';
     MatIconModule,
     TextFormatPipe,
     HighlightDirective,
+    LimitextPipe,
   ],
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css'],
