@@ -12,6 +12,7 @@
 .hero-header h1 {
   font-size: 4rem;
   font-weight: 700;
+  font-family: "Poppins", Arial, sans-serif;
   color: transparent;
   line-height: 5rem;
   background: linear-gradient(

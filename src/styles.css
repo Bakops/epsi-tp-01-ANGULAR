@@ -1,7 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Poppins";
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../public/assets/woff2/Poppins-Medium.woff2") format("woff2"),
+    url("../public/assets/woff/Poppins-Medium.woff") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../public/assets/woff2/Poppins-Bold.woff2") format("woff2"),
+    url("../public/assets/woff/Poppins-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body,
+.main-content,
+.header,
+.footer {
+  font-family: "Poppins", Arial, sans-serif;
+}
