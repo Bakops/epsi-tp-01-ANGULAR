@@ -13,8 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { TextFormatPipe } from '../../pipe/text-format.pipe';
-import { BookService } from '../../services/book.service';
+import { TextFormatPipe } from '../../../pipe/text-format.pipe';
+import { BookService } from '../../../services/book.service';
 
 @Component({
   selector: 'app-add-book',

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Book } from '../../models/book.model';
-import { BookService } from '../../services/book.service';
+import { Book } from '../../../models/book.model';
+import { BookService } from '../../../services/book.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -45,7 +45,5 @@ export class BookDetailComponent implements OnInit {
     });
   }
 
-  goBack(): void {
-    // TODO 8 : Créer un bouton qui permet de revenir à la page précédente
-  }
+  goBack(): void {}
 }

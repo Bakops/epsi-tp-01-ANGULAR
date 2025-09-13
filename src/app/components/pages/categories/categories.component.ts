@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HighlightDirective } from '../../directives/highlight.directive';
-import { LimitextPipe } from '../../pipe/limitext.pipe';
-import { TextFormatPipe } from '../../pipe/text-format.pipe';
-import { BookService } from '../../services/book.service';
+import { HighlightDirective } from '../../../directives/highlight.directive';
+import { LimitextPipe } from '../../../pipe/limitext.pipe';
+import { TextFormatPipe } from '../../../pipe/text-format.pipe';
+import { BookService } from '../../../services/book.service';
 @Component({
   selector: 'app-categories',
   standalone: true,
@@ -34,7 +34,6 @@ export class CategoriesComponent implements OnInit {
     'Nouvelle',
   ];
 
-  // Objet pour stocker les livres par catégorie
   booksByCategory: { [category: string]: any[] } = {};
 
   constructor(private bookService: BookService) {}
@@ -45,23 +44,18 @@ export class CategoriesComponent implements OnInit {
 
   loadBooks(): void {
     this.bookService.getBooks().subscribe((books) => {
-      // Initialiser l'objet booksByCategory avec des tableaux vides pour chaque catégorie
       this.categories.forEach((category) => {
         this.booksByCategory[category] = [];
       });
 
-      // Parcourir tous les livres et les ajouter aux catégories appropriées
       books.forEach((book) => {
-        // Si book.category est un tableau (pour les livres avec plusieurs catégories)
         if (Array.isArray(book.category)) {
           book.category.forEach((cat) => {
             if (this.booksByCategory[cat]) {
               this.booksByCategory[cat].push(book);
             }
           });
-        }
-        // Si book.category est une chaîne de caractères
-        else if (
+        } else if (
           typeof book.category === 'string' &&
           this.booksByCategory[book.category]
         ) {
@@ -71,7 +65,6 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  // Méthode pour vérifier si une catégorie a des livres
   hasBooksInCategory(category: string): boolean {
     return (
       this.booksByCategory[category] &&
