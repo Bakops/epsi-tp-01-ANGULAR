@@ -1,25 +1,131 @@
-<header class="header">
-  <h1>
-    <a routerLink="/" routerLinkActive="active">
-      <span>{{ title | textFormat }}</span>
-    </a>
-  </h1>
-  <nav>
-    <ul>
-      <li>
-        <a routerLink="/" routerLinkActive="active">Accueil</a>
-      </li>
-      <li>
-        <a routerLink="/books/list" routerLinkActive="active">Bibliothèque</a>
-      </li>
-      <li>
-        <a routerLink="/categories" routerLinkActive="active">Categories</a>
-      </li>
-      <li>
-        <a routerLink="/books/add" routerLinkActive="active"
-          >Ajouter un livre</a
-        >
-      </li>
-    </ul>
-  </nav>
-</header>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Troc&Vous Header</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container_header">
+      <div id="sur_header">
+        <div class="surheader-marquee">
+          <p>📚 Bienvenue sur BiblioTech - Votre bibliothèque en ligne ! 📚</p>
+        </div>
+      </div>
+
+      <header class="header2">
+        <nav class="nav-container">
+          <div class="logo">
+            <h1>
+              <a routerLink="/" routerLinkActive="active">
+                <span>{{ title | textFormat }}</span>
+              </a>
+            </h1>
+          </div>
+
+          <div class="nav-links" [class.active]="isMenuOpen" id="nav-links">
+            <a
+              routerLink="/"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              class="nav-link"
+              >Accueil</a
+            >
+            <a
+              routerLink="/books"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              class="nav-link"
+              >Liste des livres</a
+            >
+            <a
+              routerLink="/books/add"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              class="nav-link"
+              >Ajouter un livre</a
+            >
+            <a
+              routerLink="/categories"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              class="nav-link"
+              >Catégories</a
+            >
+
+            <div class="auth-buttons mobile-auth">
+              <a routerLink="/connexion" class="connexion-btn">Connexion</a>
+              <a routerLink="/inscription" class="inscription-btn"
+                >Inscription</a
+              >
+            </div>
+          </div>
+
+          <div class="auth-buttons desktop-auth">
+            <a routerLink="/connexion" class="connexion-btn">Connexion</a>
+            <a routerLink="/inscription" class="inscription-btn">Inscription</a>
+          </div>
+
+          <div
+            class="menu-icon"
+            [class.active]="isMenuOpen"
+            (click)="toggleMenu()"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              [class.active]="isMenuOpen"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M3 6C3 5.44772 3.44772 5 4 5H20C20.5523 5 21 5.44772 21 6C21 6.55228 20.5523 7 20 7H4C3.44772 7 3 6.55228 3 6ZM3 12C3 11.4477 3.44772 11 4 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H4C3.44772 13 3 12.5523 3 12ZM3 18C3 17.4477 3.44772 17 4 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H4C3.44772 19 3 18.5523 3 18Z"
+                fill="#0F1729"
+              />
+            </svg>
+          </div>
+        </nav>
+      </header>
+
+      <div
+        class="menu-overlay"
+        [class.active]="isMenuOpen"
+        (click)="closeMenu()"
+      ></div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuIcon = document.getElementById("menu-icon");
+        const navLinks = document.getElementById("nav-links");
+
+        menuIcon.addEventListener("click", function (e) {
+          e.stopPropagation();
+          navLinks.classList.toggle("active");
+          document.body.classList.toggle("menu-open");
+        });
+
+        document.addEventListener("click", function (e) {
+          if (
+            navLinks.classList.contains("active") &&
+            !navLinks.contains(e.target) &&
+            e.target !== menuIcon
+          ) {
+            navLinks.classList.remove("active");
+            document.body.classList.remove("menu-open");
+          }
+        });
+
+        navLinks.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+      });
+    </script>
+  </body>
+</html>
